@@ -1,0 +1,1762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Interactive Form 16 Generator - GSSS Kaliara</title>
+ <!-- Online Core SheetJS Engine Layer -->
+ <script src="xlsx.full.min.js"></script>
+ <script>
+   // Robust multi-origin check: If connection times out, inject offline file node
+   window.addEventListener('DOMContentLoaded', () => {
+     if (typeof XLSX === 'undefined') {
+       console.warn("CDN timed out. Checking local folder workspace streams...");
+       const localScript = document.createElement('script');
+       localScript.src = "xlsx.full.min.js";
+       document.head.appendChild(localScript);
+     }
+   });
+ </script>
+<style>
+/* Core Application Structural Elements */
+body {
+ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ background-color: #cbd5e1; /* हल्का मैटेलिक बैकग्राउंड */
+ margin: 0;
+ padding: 30px; /* स्क्रीन और बॉर्डर के बीच की साफ़ दूरी */
+ color: #1f2937;
+}
+/* पूरे फॉर्म के चारों तरफ कड़क नेवी ब्लू डबल सरकारी बॉर्डर */
+.form-container {
+ border: 4px double #1e3a8a !important; /* क्लासिक फॉर्म-16 डबल आउटलाइन */
+ padding: 35px !important; /* अंदर के डेटा को बॉर्डर से सुरक्षित दूरी देना */
+ box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.15) !important; /* प्रीमियम 3D शैडो */
+ background: #ffffff !important;
+}
+.form16-container {
+ max-width: 1050px;
+ margin: 0 auto;
+ background-color: #ffffff;
+ padding: 30px;
+ border-radius: 4px;
+ box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+/* Premium Visual Decorative Top Banner Style Frame */
+.app-decorative-banner {
+ background-color: #1e3a8a;
+ color: #ffffff;
+ padding: 20px;
+ border-radius: 4px;
+ margin-bottom: 25px;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ flex-wrap: wrap;
+ border-bottom: 4px solid #1d4ed8;
+}
+.banner-title-block h1 {
+ margin: 0;
+ font-size: 20px;
+ letter-spacing: 0.5px;
+ font-weight: 700;
+}
+.banner-title-block p {
+ margin: 5px 0 0 0;
+ font-size: 13px;
+ color: #93c5fd;
+}
+.regime-control-panel {
+ background-color: #0f172a;
+ padding: 10px 16px;
+ border-radius: 4px;
+ border: 1px solid #334155;
+}
+.regime-control-panel label {
+ color: #f8fafc;
+ margin-right: 10px;
+ font-size: 13px;
+}
+.regime-control-panel select {
+ background-color: #1e293b;
+ color: #ffffff;
+ border: 1px solid #475569;
+ padding: 6px 12px;
+ border-radius: 4px;
+ font-weight: bold;
+ cursor: pointer;
+}
+
+/* Document Header Elements Layout Alignment */
+.document-main-header {
+ text-align: center;
+ border-bottom: 3px double #374151;
+ padding-bottom: 15px;
+ margin-bottom: 25px;
+}
+.document-main-header h2 {
+ margin: 0;
+ font-size: 24px;
+ color: #111827;
+ font-weight: 700;
+}
+.document-main-header .rule-subtitle {
+ margin: 2px 0 5px 0;
+ font-style: italic;
+ font-size: 12px;
+}
+.document-main-header .legal-desc {
+ margin: 5px auto;
+ max-width: 750px;
+ font-size: 13px;
+ line-height: 1.4;
+}
+.assessment-badge-box {
+ margin-top: 10px;
+ font-size: 14px;
+ background-color: #e0f2fe;
+ color: #0369a1;
+ display: inline-block;
+ padding: 4px 14px;
+ border-radius: 4px;
+ border: 1px solid #bae6fd;
+}
+/* Form Sections and Interactive Layout Structures */
+.form-layout-section {
+ border: 1px solid #cbd5e1;
+ border-radius: 4px;
+ padding: 20px;
+ margin-bottom: 25px;
+ background-color: #ffffff;
+}
+.form-layout-section legend {
+ font-weight: bold;
+ font-size: 13px;
+ background-color: #1e3a8a;
+ color: #ffffff;
+ padding: 4px 14px;
+ border-radius: 2px;
+ letter-spacing: 0.5px;
+}
+.structural-dual-grid {
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: 20px;
+}
+.compliance-card {
+ background-color: #fafafa;
+ border: 1px solid #e2e8f0;
+ border-radius: 4px;
+ padding: 15px;
+}
+.compliance-card h3 {
+ margin: 0 0 12px 0;
+ font-size: 13px;
+ color: #1e3a8a;
+ border-bottom: 2px solid #cbd5e1;
+ padding-bottom: 6px;
+}
+.org-bold-title {
+ font-weight: 700;
+ font-size: 13px;
+ margin: 0 0 4px 0;
+}
+.org-sub-details {
+ font-size: 12px;
+ color: #4b5563;
+ margin: 0 0 12px 0;
+}
+.inline-input-group {
+display: flex;
+align-items: center;
+margin-bottom: 6px;
+}
+.inline-input-group label {
+ width: 140px;
+ font-size: 12px;
+ font-weight: 600;
+}
+/* Control Element Input Fields Styles Framework */
+/* Control Element Input Fields Styles Framework */
+.form-input-field {
+flex: 1;
+padding: 4px 8px;
+border: 1px solid #cbd5e1;
+border-radius: 4px;
+font-size: 13px;
+color: #1f2937;
+background-color: #ffffff;
+}
+.form-input-field:focus {
+ outline: none;
+ border-color: #1e3a8a;
+ box-shadow: 0 0 0 2px rgba(30, 58, 138, 0.15);
+}
+.form-input-field[readonly] {
+ background-color: #f1f5f9;
+ font-weight: 600;
+ cursor: not-allowed;
+}
+.text-numeric-align {
+ text-align: right;
+}
+.font-weight-bold {
+ font-weight: bold;
+}
+.code-pan-caps {
+ text-transform: uppercase;
+}
+/* Table Architecture Elements Formatting */
+.table-scroll-container {
+ width: 100%;
+ overflow-x: auto;
+}
+.computational-matrix-table {
+ width: 100%;
+ border-collapse: collapse;
+ font-size: 13px;
+ margin-top: 5px;
+}
+.computational-matrix-table th, .computational-matrix-table td {
+border: 1px solid #cbd5e1;
+padding: 4px 8px;
+text-align: left;
+vertical-align: middle;
+line-height: 1.2;
+}
+.computational-matrix-table th {
+ background-color: #f8fafc;
+ color: #1e3a8a;
+ font-weight: 700;
+}
+/* Merged Cell Formatting Panel Center Weights */
+.merged-cell-lock {
+ text-align: center !important;
+ background-color: #f8fafc;
+}
+.ceiling-label {
+ display: block;
+ font-size: 11px;
+ color: #475569;
+ font-weight: 600;
+ margin-bottom: 4px;
+ text-transform: uppercase;
+}
+.center-lock-weight {
+ max-width: 120px;
+ margin: 0 auto;
+ text-align: center;
+}
+.slab-view-title {
+ font-size: 13px;
+ margin-bottom: 10px;
+ color: #1e3a8a;
+}
+/* Highlights for Row States Based on Computations */
+.summary-highlight-row {
+ background-color: #f1f5f9;
+}
+.exemption-highlight-row {
+ background-color: #f0fdf4;
+}
+.final-net-income-row {
+ background-color: #eff6ff;
+}
+.sub-section-title {
+ background-color: #f8fafc;
+ color: #334155;
+ text-transform: uppercase;
+ font-size: 12px;
+ letter-spacing: 0.5px;
+}
+.color-positive {
+ color: #166534 !important;
+}
+.section-alert-message {
+ font-size: 11px;
+ color: #64748b;
+ margin: -5px 0 10px 0;
+ font-style: italic;
+}
+.lock-indicator-badge {
+ font-size: 10px;
+ color: #475569;
+ background-color: #e2e8f0;
+ padding: 2px 6px;
+ border-radius: 3px;
+ margin-left: 5px;
+}
+
+/* Dynamic State Outcome Classes (Refund vs Deficit Panels) */
+.outcome-refund-style {
+ background-color: #f0fdf4 !important;
+}
+.outcome-shortfall-style {
+ background-color: #fef2f2 !important;
+}
+.output-clean-color {
+ background-color: transparent !important;
+ border: none !important;
+}
+/* Custom Hide Class for Slab Toggles */
+.hide-slab-panel {
+ display: none !important;
+}
+
+/* CRITICAL REQUIREMENT: Grayed-out Matte System Masking */
+.regime-disabled-mask {
+ background-color: #f1f5f9 !important;
+ opacity: 0.55;
+ pointer-events: none;
+ border: 1px dashed #94a3b8 !important;
+}
+.regime-disabled-mask input, .regime-disabled-mask select {
+ background-color: #e2e8f0 !important;
+ color: #94a3b8 !important;
+ cursor: not-allowed;
+}
+/* Legal Verification Box Layout Parameters */
+.execution-verification-card {
+ border: 1px dashed #4b5563;
+ background-color: #ffffff;
+}
+.verification-text-body {
+ font-size: 13px;
+ line-height: 1.6;
+ margin-bottom: 25px;
+ text-align: justify;
+}
+.input-underline-text {
+ font-weight: 700;
+ border-bottom: 1px solid #000000;
+ padding: 0 8px;
+}
+.verification-meta-footer-row {
+ display: flex;
+ justify-content: space-between;
+ align-items: flex-start;
+}
+.meta-date-place p {
+ margin: 6px 0;
+ font-size: 13px;
+}
+.inline-date-picker-input {
+ border: none;
+ border-bottom: 1px solid #000000;
+ font-size: 13px;
+ font-weight: 700;
+ width: 100px;
+ padding: 0 4px;
+}
+.meta-signature-area {
+ text-align: center;
+ width: 320px;
+}
+.signature-line-dash {
+ border-top: 1px solid #000000;
+ margin-bottom: 6px;
+ width: 100%;
+}
+.sig-label {
+ font-size: 11px;
+ color: #4b5563;
+ margin: 0 0 4px 0;
+}
+.sig-name {
+ font-size: 13px;
+ margin: 0;
+}
+/* Elegant Architecture Orange Branding Badge Panel */
+/* Unique Royal Cyber-Gold Signature Branding Badge Masterpiece */
+.system-craft-badge-panel {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #020617 100%) !important;
+    border: 2px solid transparent !important;
+    background-image: linear-gradient(#0f172a, #020617), linear-gradient(135deg, #fbbf24 0%, #d97706 50%, #b45309 100%) !important;
+    background-origin: border-box !important;
+    background-clip: padding-box, border-box !important;
+    color: #f8fafc !important;
+    padding: 14px 20px !important;
+    border-radius: 12px !important;
+    text-align: center !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    margin: 30px auto 15px auto !important;
+    max-width: 95% !important;
+    box-shadow: 0 10px 30px -10px rgba(251, 191, 36, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+.system-craft-badge-panel p {
+    margin: 0 !important;
+    letter-spacing: 1.2px !important;
+    text-transform: uppercase !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6) !important;
+}
+.system-craft-badge-panel strong {
+    color: #fbbf24 !important; /* Cyber Gold Highlight for Jasbir Singh */
+    font-weight: 800 !important;
+    letter-spacing: 1.5px !important;
+    text-shadow: 0 0 12px rgba(251, 191, 36, 0.4) !important;
+}
+/* Operational Buttons Deck Custom Styles */
+.action-control-deck-bar {
+ display: flex;
+ justify-content: center;
+ gap: 15px;
+ margin-top: 20px;
+ padding-top: 15px;
+ border-top: 1px solid #e5e7eb;
+}
+.action-btn {
+ padding: 10px 24px;
+ font-size: 13px;
+ font-weight: 600;
+ border: none;
+ border-radius: 4px;
+ cursor: pointer;
+ transition: background-color 0.2s;
+}
+.btn-excel-submit { background-color: #16a34a; color: #ffffff; }
+.btn-excel-submit:hover { background-color: #15803d; }
+.btn-excel-load { background-color: #2563eb; color: #ffffff; }
+.btn-excel-load:hover { background-color: #1d4ed8; }
+.btn-pdf-print { background-color: #4b5563; color: #ffffff; }
+.btn-pdf-print:hover { background-color: #374151; }
+.hidden-file-node {
+ display: none !important;
+}
+/* Dedicated Printing Framework Formats */
+/* Dedicated Printing Framework Formats - Re-engineered for Force 2-Page Budget */
+/* Dedicated Printing Framework Formats - Clean Flow 2-Page Budget Lock */
+@media print {
+body { background-color: #ffffff; padding: 0; margin: 0; font-size: 11px !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.no-print { display: none !important; }
+.form-container, .form16-container { box-shadow: none !important; padding: 0 !important; margin: 0 auto !important; max-width: 100% !important; border: none !important; }
+.form-layout-section { margin-bottom: 5px !important; padding: 5px !important; page-break-inside: avoid !important; }
+.form-layout-section legend { padding: 1px 5px !important; font-size: 10.5px !important; }
+.computational-matrix-table th, .computational-matrix-table td { padding: 2px 4px !important; font-size: 11px !important; line-height: 1.1 !important; }
+.form-input-field { border: none !important; background: transparent !important; padding: 0 !important; font-size: 11px !important; height: auto !important; }
+.inline-input-group { margin-bottom: 2px !important; }
+.compliance-card { padding: 4px !important; }
+.document-main-header { padding-bottom: 4px !important; margin-bottom: 6px !important; }
+.document-main-header h2 { font-size: 18px !important; margin: 0 !important; }
+.document-main-header .rule-subtitle { margin: 1px 0 !important; font-size: 11px !important; }
+.document-main-header .legal-desc { margin: 1px auto !important; font-size: 11px !important; line-height: 1.2 !important; }
+.assessment-badge-box { margin-top: 4px !important; padding: 2px 8px !important; }
+.assessment-badge-box span { font-size: 14px !important; }
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+input[type=number] { -moz-appearance: textfield; }
+.system-craft-badge-panel { display: none !important; }
+}
+/* ==========================================================================
+   PREMIUM DYNAMIC VISUAL ART ENGINE - ADJUSTED FOR ORIGINAL UTILITY LAYER
+   ========================================================================== */
+/* 1. इनपुट बॉक्स पर प्रीमियम रॉयल ब्लू ग्लो और सॉफ्ट ज़ूम (Focus Engine) */
+.form-input-field {
+    transition: all 0.2s ease-in-out !important;
+}
+.form-input-field:focus {
+    outline: none !important;
+    border-color: #2563eb !important;
+    background-color: #f8fafc !important;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15) !important;
+}
+/* 2. सेक्शन्स के हेडर को मॉडर्न प्रोग्रेसिव ग्रेडिएंट लुक देना (Gradient Legend) */
+.form-layout-section legend {
+    background: linear-gradient(135deg, #1e3a8a 0%, #0d9488 100%) !important;
+    color: #ffffff !important;
+    padding: 6px 16px !important;
+    border-radius: 4px !important;
+    box-shadow: 0 4px 10px rgba(30, 58, 138, 0.15) !important;
+    text-transform: uppercase !important;
+    font-weight: 700 !important;
+}
+
+/* 3. लॉक बॉक्स के लिए तिरछी धारीदार फ्रॉस्टेड मैट फिनिश (Frosted Matte Matrix) */
+.regime-disabled-mask {
+    background: repeating-linear-gradient(45deg, #f1f5f9, #f1f5f9 10px, #f8fafc 10px, #f8fafc 20px) !important;
+    border: 1px dashed #cbd5e1 !important;
+    opacity: 0.7 !important;
+}
+/* 4. लाइव स्टेटस बार - टैक्स लायबिलिटी के आधार पर डायनामिक रंग बदलना */
+.outcome-refund-style {
+    background: linear-gradient(90deg, #f0fdf4 0%, #dcfce7 100%) !important;
+    border-left: 5px solid #16a34a !important;
+}
+.outcome-shortfall-style {
+    background: linear-gradient(90deg, #fef2f2 0%, #fee2e2 100%) !important;
+    border-left: 5px solid #dc2626 !important;
+}
+/* 5. रिजीम बदलने पर स्लैब टेबल्स का स्मूथली ऊपर से नीचे स्लाइड होना */
+#oldSlabWrapper, #newSlabWrapper {
+    animation: smoothMatrixSlide 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+@keyframes smoothMatrixSlide {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+/* --- JASBIR SINGH PREMIUM COMBINED BOTTOM UTILITY DECK --- */
+.premium-footer-deck-wrapper {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 24px !important;
+    max-width: 1050px !important;
+    margin: 40px auto 20px auto !important;
+    padding: 0 !important;
+    background: transparent !important;
+}
+.system-craft-badge-panel {
+    background: #1e293b !important;
+    border-radius: 16px !important;
+    padding: 20px 24px !important;
+    box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.25) !important;
+    border: none !important;
+    flex: 1 !important;
+    min-width: 340px !important;
+    max-width: 520px !important;
+    margin: 0 !important;
+}
+.badge-flex-container {
+    display: flex !important;
+    align-items: center !important;
+    gap: 18px !important;
+}
+.badge-avatar-wrapper {
+    position: relative !important;
+    width: 75px !important;
+    height: 75px !important;
+    border-radius: 50% !important;
+    padding: 2px !important;
+    background: linear-gradient(135deg, #2563eb, #38bdf8) !important;
+}
+.badge-avatar-img {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    border: 2px solid #1e293b !important;
+    display: block !important;
+}
+.badge-info-side {
+    flex: 1 !important;
+    text-align: left !important;
+}
+.badge-system-tag {
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    color: #38bdf8 !important; /* चमकीला टेक्निकल वर्ड */
+    letter-spacing: 1.5px !important;
+    text-transform: uppercase !important;
+    margin-bottom: 4px !important;
+}
+.badge-dev-name {
+    color: #ffffff !important;
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    margin: 0 0 2px 0 !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+}
+.badge-dev-role {
+    color: #94a3b8 !important;
+    font-size: 13px !important;
+    margin: 0 !important;
+    font-weight: 500 !important;
+}
+.action-control-deck-bar {
+    display: flex !important;
+    gap: 12px !important;
+    justify-content: flex-end !important;
+    flex-wrap: wrap !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+}
+@media print {
+    .premium-footer-deck-wrapper, .premium-footer-deck-wrapper * {
+        display: none !important;
+        height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+}
+/* PAN Fetch Button Alignment Style */
+.pan-fetch-inline-block {
+    display: flex !important;
+    gap: 8px !important;
+    width: 100% !important;
+}
+.btn-inline-fetch {
+    background-color: #2563eb !important;
+    color: #ffffff !important;
+    border: none !important;
+    padding: 6px 14px !important;
+    border-radius: 4px !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    transition: background-color 0.2s !important;
+    white-space: nowrap !important;
+}
+.btn-inline-fetch:hover {
+    background-color: #1d4ed8 !important;
+}
+</style>
+</head>
+<body>
+<div class="no-print" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 25px 20px; border-radius: 12px; border: 1px solid #334155; font-family: 'Segoe UI', system-ui, sans-serif; margin-bottom: 30px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2); overflow: hidden; position: relative;">
+    <!-- 1. राइट टू लेफ्ट स्क्रॉलिंग डेवलपर क्रेडेंशियल (Premium Marquee Effect) -->
+    <div style="width: 100%; overflow: hidden; white-space: nowrap; margin-bottom: 15px; background: rgba(15, 23, 42, 0.8); padding: 6px 0; border-top: 1px dashed #475569; border-bottom: 1px dashed #475569;">
+        <div style="display: inline-block; padding-left: 100%; animation: premiumScrollText 40s linear infinite; font-size: 13.5px; font-weight: 700; color: #f59e0b !important; letter-spacing: 1px; text-transform: uppercase;">
+            🛡️ System Architecture &amp; Developer : Jasbir Singh (JOA IT) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🚀 Govt. Sr. Sec. School Kaliara Tax Engine Status: Fully Optimized &amp; Compliant (AY 2027-28) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🌐 Secure Database Sync Enabled 🛡️ 
+        </div>
+    </div>
+    <style>
+    @keyframes premiumScrollText {
+        0% { transform: translate3d(0, 0, 0); }
+        100% { transform: translate3d(-100%, 0, 0); }
+    }
+    </style>
+    <!-- 2. मुख्य यूटिलिटी हेडिंग: डार्क थीम पर साफ और रोबदार लुक -->
+    <h1 style="color: #f8fafc !important; font-size: 30px !important; font-weight: 800; margin: 0 0 20px 0; text-align: center; text-transform: uppercase; letter-spacing: 1.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">
+        GSSS KALIARA TAX COMPLIANCE UTILITY
+    </h1>
+    <!-- 3. टैक्स रिजीम सेलेक्टर: कड़ाई से फिक्स्ड आईडी और अलाइनमेंट -->
+    <div style="display: flex; justify-content: center; align-items: center; gap: 15px; background: rgba(30, 41, 59, 0.7); padding: 12px 25px; border-radius: 8px; border: 1px solid #475569; max-width: 650px; margin: 0 auto; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);">
+        <label for="taxRegimeSelect" style="color: #94a3b8 !important; font-weight: 600; font-size: 14.5px; letter-spacing: 0.5px; white-space: nowrap;">
+            Select Tax Assessment Regime:
+        </label>
+        <select id="taxRegimeSelect" onchange="handleRegimeShift()" style="background-color: #0f172a !important; color: #38bdf8 !important; border: 1px solid #0284c7 !important; padding: 10px 15px; font-weight: 700; font-size: 14px; border-radius: 6px; cursor: pointer; transition: all 0.2s ease-in-out; outline: none; flex: 1; min-width: 280px; box-shadow: 0 0 10px rgba(2, 132, 199, 0.2);">
+            <option value="old">Old Tax Regime (With Deductions &amp; HRA Exemptions)</option>
+            <option value="new" selected="">New Tax Regime (U/S 115BAC - Default)</option>
+        </select>
+    </div>
+</div>
+<!-- Standard Form 16 Legal Header -->
+ <div class="document-main-header">
+ <h2>FORM NO. 16</h2>
+<p class="rule-subtitle">[Under Section 392 of Income-tax Act, 2025]</p>
+<p class="legal-desc">Certificate under Section 392 of the Income-tax Act, 2025 for tax deducted at source from income under the head "Salaries"</p>
+<div class="assessment-badge-box" style="padding: 6px 18px;">
+ <span style="font-size: 18px; font-weight: bold; color: #0369a1; display: inline-block;"><strong>Assessment Year:</strong> 2027-28</span>
+</div>
+</div>
+ <!-- Part A: Identification Particulars Grid Container -->
+ <fieldset class="form-layout-section">
+ <legend>PART A - IDENTIFICATION PARTICULARS</legend>
+ <div class="structural-dual-grid">
+ <!-- Employer Data Panel -->
+ <div class="compliance-card">
+ <h2>Name and Address of the Employer</h2>
+ <div class="card-interior-body">
+ <p class="org-bold-title">Sh. Ajay Kumar </p> 
+ <p class="org-bold-title">Principal, Govt. Sr. Sec. School Kaliara</p>
+<p class="org-bold-title">Distt. Kangra, Himachal Pradesh, Pin: 176209</p>
+ <div class="inline-input-group">
+<label for="employerTAN">TAN of Employer:</label>
+<input type="text" id="employerTAN" value="PTLG13313G" class="form-input-field" maxlength="10" required oninput="this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '');" onchange="const pat=/^[A-Z]{4}[0-9]{5}[A-Z]{1}$/; if(!pat.test(this.value)){ this.style.borderColor = 'red'; this.style.backgroundColor = '#fee2e2'; alert('Error: Invalid TAN format. Must be 4 letters, 5 digits, 1 letter.'); }else{ this.style.borderColor = ''; this.style.backgroundColor = ''; }">
+</div>
+ </div>
+ </div>
+ <!-- Employee Data Panel -->
+<div class="card-interior-body">
+<div class="inline-input-group">
+<label for="empName">Employee Name:</label>
+<input type="text" id="empName" placeholder="ENTER FULL NAME (CAPITAL LETTERS ONLY)" class="form-input-field" required oninput="this.value = this.value.toUpperCase(); calculateTaxEngine();" onchange="if(this.value.trim()===''){ this.style.borderColor = 'red'; this.style.backgroundColor = '#fee2e2'; alert('Error: Employee Name is mandatory.'); }else{ this.style.borderColor = ''; this.style.backgroundColor = ''; }">
+</div>
+<div class="inline-input-group">
+<label for="empDesignation">Designation:</label>
+<select id="empDesignation" class="form-input-field" required onchange="calculateTaxEngine(); if(this.value===''){ this.style.borderColor = 'red'; this.style.backgroundColor = '#fee2e2'; alert('Error: Designation selection is mandatory.'); }else{ this.style.borderColor = ''; this.style.backgroundColor = ''; }">
+ <option value="" disabled selected>-- Select Designation --</option>
+ <option value="Principal">Principal</option>
+ <option value="Lecturer">Lecturer</option>
+ <option value="TGT">TGT</option>
+ <option value="P.E.T.">P.E.T.</option>
+ <option value="Supdt Gd-II">Supdt Gd-II</option>
+ <option value="Sr. Asst.">Sr. Asst.</option>
+ <option value="JOA (IT)">JOA (IT)</option>
+ <option value="Clerk">Clerk</option>
+ <option value="Peon">Peon</option>
+ <option value="Peon-cum-Chowkidar">Peon-cum-Chowkidar</option>
+ <option value="L.A.">L.A.</option>
+ <option value="D.M.">D.M.</option>
+ <option value="Asst. Lab">Asst. Lab</option>
+ <option value="Others">Others</option>
+</select>
+</div>
+<!-- UPGRADED INLINE PAN FETCH FOR PERFECT TALMEL -->
+<div class="inline-input-group">
+<label for="employeePAN">PAN of Employee:</label>
+<div class="pan-fetch-inline-block">
+    <input type="text" id="employeePAN" placeholder="ABCDE1234F" class="form-input-field code-pan-caps" 
+    maxlength="10" required oninput="this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '');" onchange="const 
+    pat=/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/; if(!pat.test(this.value)){ this.style.borderColor = 'red'; this.style.backgroundColor = 
+    '#fee2e2'; alert('Error: Invalid PAN format. Must be 5 letters, 4 digits, 1 letter.'); }else{ this.style.borderColor = ''; 
+    this.style.backgroundColor = ''; }">
+    <button type="button" class="btn-inline-fetch no-print" onclick="fetchDataFromGoogleSheetByPan()">⚡ Fetch Record</button>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</fieldset>
+
+ <!-- Part B: Gross Salary Computations Workspace -->
+ <fieldset class="form-layout-section">
+ <legend>PART B - GROSS SALARY COMPUTATION WORKSPACE</legend>
+ <div class="table-scroll-container">
+ <table class="computational-matrix-table">
+ <thead>
+ <tr>
+ <th style="width: 5%;">S.No</th>
+<th style="width: 75%;">Particulars of Income under Head Salaries</th>
+<th style="width: 20%;">Amount (₹)</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td>1.</td>
+ <td>Annual Basic Pay + DA Amount (Core Salary Base)</td>
+ <td><input type="number" id="annualBasicDa" class="form-input-field text-numeric-align" value="0" oninput="calculateTaxEngine()"></td>
+ </tr>
+ <tr>
+ <td>2.</td>
+ <td>Value of perquisites under section 17(2) (As per Form 12BA)</td>
+ <td><input type="number" id="perquisites17_2" class="form-input-field text-numeric-align" value="0" oninput="calculateTaxEngine()"></td>
+ </tr>
+ <tr>
+ <td>3.</td>
+ <td>Profits in lieu of salary under section 17(3)</td>
+ <td><input type="number" id="profits17_3" class="form-input-field text-numeric-align" value="0" oninput="calculateTaxEngine()"></td>
+ </tr>
+ <!-- INTEGRATED TAX STANDARD DEDUCTION VISUAL GRID ENTRY -->
+<tr>
+<td>4.</td>
+<td><strong>Less: Standard Deduction under Section 16(ia)</strong></td>
+<td><input type="number" id="standardDeductionRow" class="form-input-field text-numeric-align" value="0" 
+readonly></td>
+</tr>
+<tr class="summary-highlight-row">
+<td>5.</td>
+<td><strong>Total Taxable Salary / Gross Income (1 + 2 + 3 - 4)</strong></td>
+<td><input type="number" id="totalGrossSalary" class="form-input-field text-numeric-align font-weight-bold" 
+value="0" readonly></td>
+</tr>
+ </tbody>
+ </table>
+ </div>
+ </fieldset>
+ <!-- Section C: House Rent Allowance Evaluator -->
+ <fieldset class="form-layout-section" id="hraSectionBlock">
+ <legend>SECTION 10 - ALLOWANCES EXEMPT FROM TAX (HRA EVALUATOR)</legend>
+ <p class="section-alert-message no-print">*Note: This entire workspace locks and resets to 0 under the New Tax Regime.</p>
+ <div class="table-scroll-container">
+ <table class="computational-matrix-table">
+ <thead>
+ <tr>
+ <th style="width: 5%;">S.No</th>
+ <th style="width: 75%;">HRA Exemption Formula Steps [Sec 10(13A)]</th>
+ <th style="width: 20%;">Amount (₹)</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+   <td>6.</td>
+   <td>Actual House Rent Allowance (HRA) Received from Employer</td>
+   <td><input type="number" id="hraReceived" class="form-input-field text-numeric-align regime-dependent" value="0" oninput="calculateTaxEngine()"></td>
+ </tr>
+ <tr>
+   <td>7.</td>
+   <td>10% of Annual Salary (Basic Pay + DA Only) <small style="color: #ef4444; font-weight: bold; text-align: right;"> *(Enter 10% of Annual Basic Pay + DA only)* </small> </td>
+   <td>
+   <input type="number" id="hraTenPercent" class="form-input-field text-numeric-align" value="0" oninput="calculateTaxEngine()">
+  
+</td>
+ </tr>
+ <tr>
+   <td>8.</td>
+   <td>Actual Rent Paid by the Employee during the Financial Year</td>
+   <td><input type="number" id="hraRentPaid" class="form-input-field text-numeric-align regime-dependent" value="0" oninput="calculateTaxEngine()"></td>
+ </tr>
+ <tr>
+   <td>9.</td>
+   <td>Excess of Rent Paid over 10% of Salary (C minus B) <span class="lock-indicator-badge">[Auto Panel]</span></td>
+   <td><input type="number" id="hraRentExcess" class="form-input-field text-numeric-align" value="0" readonly></td>
+ </tr>
+ <tr>
+   <td>10.</td>
+   <td>50% (Metros) or 40% (Non-Metros) of Annual Salary (Basic Pay + DA)</td>
+   <td><input type="number" id="hraSalaryPercentage" class="form-input-field text-numeric-align regime-dependent" value="0" oninput="calculateTaxEngine()"></td>
+ </tr>
+ <tr class="exemption-highlight-row">
+   <td>11.</td>
+   <td><strong>Final Eligible HRA Exemption (Minimum of A, D, and E)</strong></td>
+   <td><input type="number" id="finalHraExemption" class="form-input-field text-numeric-align font-weight-bold color-positive" value="0" readonly></td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+ </fieldset>
+ <!-- Section D: Deductions Under Chapter VI-A & Other Workspace -->
+ <fieldset class="form-layout-section" id="chapterViaBlock">
+ <legend>DEDUCTIONS UNDER CHAPTER VI-A & OTHER WORKSPACE</legend>
+ <p class="section-alert-message no-print">*Note: Chapter VI-A deductions are legally deactivated under the New Tax Regime.</p>
+ <div class="table-scroll-container">
+ <table class="computational-matrix-table">
+ <thead>
+ <tr>
+ <th style="width: 5%;">S.No</th>
+<th style="width: 55%;">Deduction Type & Legal Sections</th>
+<th style="width: 20%;">Declared Amount (₹)</th>
+<th style="width: 20%;">Eligible Calculation Limit (₹)</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td>12.</td>
+ <td>GPF / PPF / TPF / CPS Contribution Pool</td>
+ <td><input type="number" id="inputGpf" class="form-input-field text-numeric-align regime-dependent" value="0" oninput="calculateTaxEngine()"></td>
+ <td rowspan="6" class="merged-cell-lock">
+ <span class="ceiling-label">Sec 80C Combined Max</span>
+ <input type="number" id="eligible80C" class="form-input-field text-numeric-align center-lock-weight" value="150000" readonly>
+ </td>
+ </tr>
+ <tr>
+ <td>13.</td>
+ <td>GIS / AIS / LIC / PLI Premium Paid</td>
+ <td><input type="number" id="inputGis" class="form-input-field text-numeric-align regime-dependent" value="0" oninput="calculateTaxEngine()"></td>
+ </tr>
+ <tr>
+ <td>14.</td>
+ <td>UTI / ULIP / Mutual Funds (ELSS)</td>
+ <td><input type="number" id="inputUti" class="form-input-field text-numeric-align regime-dependent" value="0" oninput="calculateTaxEngine()"></td>
+ </tr>
+ <tr>
+ <td>15.</td>
+ <td>House Loan Principal Amount Paid</td>
+ <td><input type="number" id="inputHouseLoan" class="form-input-field text-numeric-align regime-dependent" value="0" oninput="calculateTaxEngine()"></td>
+ </tr>
+ <tr>
+ <td>16.</td>
+ <td>Tuition Fee of Two Children</td>
+ <td><input type="number" id="inputTuition" class="form-input-field text-numeric-align regime-dependent" value="0" oninput="calculateTaxEngine()"></td>
+ </tr>
+ <tr>
+ <td>17.</td>
+ <td>NSC (National Savings Certificate)</td>
+ <td><input type="number" id="inputNsc" class="form-input-field text-numeric-align regime-dependent" value="0" oninput="calculateTaxEngine()"></td>
+ </tr>
+ <tr class="summary-highlight-row">
+ <td>18.</td>
+ <td><strong>Total Formulated 80C Investments</strong></td>
+ <td><input type="number" id="total80CDeclared" class="form-input-field text-numeric-align font-weight-bold" value="0" readonly></td>
+ <td><input type="number" id="total80CEligible" class="form-input-field text-numeric-align font-weight-bold" value="0" readonly></td>
+ </tr>
+ <tr>
+ <td>19.</td>
+ <td>U/S 80CCD(1B) (NPS Additional Investment - Max ₹50,000)</td>
+ <td><input type="number" id="input80Ccd1b" class="form-input-field text-numeric-align regime-dependent" value="0" oninput="calculateTaxEngine()"></td>
+ <td><input type="number" id="eligible80Ccd1b" class="form-input-field text-numeric-align" value="0" readonly></td>
+ </tr>
+ <tr>
+ <td>20.</td>
+ <td>Deduction of 14% Employer U/S 80CCD(2)</td>
+ <td><input type="number" id="input80Ccd2" class="form-input-field text-numeric-align regime-dependent" value="0" oninput="calculateTaxEngine()"></td>
+ <td><input type="number" id="eligible80Ccd2" class="form-input-field text-numeric-align" value="0" readonly></td>
+ </tr>
+ <tr class="summary-highlight-row">
+ <td><strong>21.</strong></td>
+ <td><strong>Total Chapter VI-A Deductions (80C to 80CCD-1B)</strong></td>
+ <td>-</td>
+ <td><input type="number" id="totalChapterViaDeductions" class="form-input-field text-numeric-align font-weight-bold" value="0" readonly></td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+ </fieldset>
+ <!-- Section E: Other Deductions Workspace (U/S 80D to 80U) With Zero-Ceiling Correction -->
+ <fieldset class="form-layout-section" id="otherDeductionsBlock">
+ <legend>OTHER DEDUCTIONS WORKSPACE (U/S 80D TO 80U)</legend>
+ <p class="section-alert-message no-print">*Note: These deductions are automatically disabled and reset to 0 under the New Tax Regime.</p>
+ <div class="table-scroll-container">
+ <table class="computational-matrix-table">
+ <thead>
+ <tr>
+ <th style="width: 5%;">S.No</th>
+ <th style="width: 55%;">Deduction Type & Legal Sections</th>
+ <th style="width: 20%;">Declared Amount (₹)</th>
+ <th style="width: 20%;">Eligible Calculation Limit (₹)</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td>22.</td>
+ <td>U/S 80D: Premiums of Health Insurance (Max ₹25,000)</td>
+ <td><input type="number" id="input80D" class="form-input-field text-numeric-align regime-dependent" value="0" oninput="calculateTaxEngine()"></td>
+ <td><input type="number" id="eligible80D" class="form-input-field text-numeric-align" value="0" readonly></td>
+ </tr>
+ <tr>
+ <td>23.</td>
+ <td>U/S 80DD: Medical Dependent with Disability (Max ₹1,25,000)</td>
+ <td>
+ <select id="select80DD" class="form-input-field regime-dependent" onchange="calculateTaxEngine()">
+ <option value="NONE" selected>No Disability (₹0)</option>
+ <option value="STANDARD">Standard Disability 40%-80% (₹75,000)</option>
+ <option value="SEVERE">Severe Disability 80%+ (₹1,25,000)</option>
+ </select>
+ </td>
+ <td><input type="number" id="eligible80DD" class="form-input-field text-numeric-align" value="0" readonly></td>
+ </tr>
+ <tr>
+ <td>24.</td>
+ <td>U/S 80U: Resident Individual with Certified Disability (Max ₹1,25,000)</td>
+ <td>
+ <select id="select80U" class="form-input-field regime-dependent" onchange="calculateTaxEngine()">
+ <option value="NONE" selected>No Disability (₹0)</option>
+ <option value="STANDARD">Standard Disability 40%-80% (₹75,000)</option>
+ <option value="SEVERE">Severe Disability 80%+ (₹1,25,000)</option>
+ </select>
+ </td>
+ <td><input type="number" id="eligible80U" class="form-input-field text-numeric-align" value="0" readonly></td>
+ </tr>
+ <tr>
+ <td>25.</td>
+ <td>U/S 80G: Donations Specified (As per Eligibility Rules)</td>
+ <td><input type="number" id="input80G" class="form-input-field text-numeric-align regime-dependent" value="0" oninput="calculateTaxEngine()"></td>
+ <td><input type="number" id="eligible80G" class="form-input-field text-numeric-align" value="0" readonly></td>
+ </tr>
+ <tr>
+ <td>26.</td>
+ <td>U/S 57(iia): Family Pension Deduction (Max ₹25,000)</td>
+ <td><input type="number" id="input57iia" class="form-input-field text-numeric-align regime-dependent" value="0" oninput="calculateTaxEngine()"></td>
+ <td><input type="number" id="eligible57iia" class="form-input-field text-numeric-align" value="0" readonly></td>
+ </tr>
+ <tr class="summary-highlight-row">
+ <td><strong>27.</strong></td>
+ <td><strong>Total Other Deductions (U/S 80D to 80U)</strong></td>
+ <td>-</td>
+ <td><input type="number" id="totalOtherDeductions" class="form-input-field text-numeric-align font-weight-bold" value="0" readonly></td>
+ </tr>
+ <tr class="final-net-income-row">
+ <td><strong>28.</strong></td>
+ <td><strong>NET TAXABLE INCOME [NTI]: 5-(11+21+27) (Rounded off to nearest ₹10)</strong></td>
+ <td>-</td>
+ <td><input type="number" id="netTaxableIncome" class="form-input-field text-numeric-align font-weight-bold" value="0" readonly></td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+ </fieldset>
+ <!-- Section F: Dynamic Slab Calculation Breakdown Panel -->
+ <fieldset class="form-layout-section">
+ <legend>TAX LIABILITY BREAKDOWN</legend>
+ <!-- Old Tax Regime Slabs Table View -->
+ <div id="oldSlabWrapper" class="table-scroll-container">
+ <p class="slab-view-title"><strong> Old Regime Income Tax Slabs Breakdown View</strong></p>
+ <table class="computational-matrix-table">
+ <thead>
+ <tr>
+ <th style="width: 70%;">Old Regime Income Tax Slabs</th>
+ <th style="width: 30%;">Calculated Tax Liability (₹)</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr><td>Tax from ₹0 to ₹2,50,000 (@ 0%)</td><td><input type="number" id="oldSlab1" class="form-input-field text-numeric-align" value="0" readonly></td></tr>
+ <tr><td>Tax from ₹2,50,001 to ₹5,00,000 (@ 5%)</td><td><input type="number" id="oldSlab2" class="form-input-field text-numeric-align" value="0" readonly></td></tr>
+ <tr><td>Tax from ₹5,00,001 to ₹10,00,000 (@ 20%)</td><td><input type="number" id="oldSlab3" class="form-input-field text-numeric-align" value="0" readonly></td></tr>
+ <tr><td>Tax above ₹10,00,000 (@ 30%)</td><td><input type="number" id="oldSlab4" class="form-input-field text-numeric-align" value="0" readonly></td></tr>
+ </tbody>
+ </table>
+ </div>
+ <!-- New Tax Regime Slabs Table View (AY 2027-28 Multi-Tier Structure) -->
+ <div id="newSlabWrapper" class="table-scroll-container hide-slab-panel">
+ <p class="slab-view-title"><strong> New Regime Income Tax Slabs Breakdown View (Budget Rules)</strong></p>
+ <table class="computational-matrix-table">
+ <thead>
+ <tr>
+ <th style="width: 70%;">New Regime Income Tax Slabs</th>
+ <th style="width: 30%;">Calculated Tax Liability (₹)</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr><td>Tax from ₹0 to ₹4,00,000 (@ 0%)</td><td><input type="number" id="newSlab1" class="form-input-field text-numeric-align" value="0" readonly></td></tr>
+ <tr><td>Tax from ₹4,00,001 to ₹8,00,000 (@ 5%)</td><td><input type="number" id="newSlab2" class="form-input-field text-numeric-align" value="0" readonly></td></tr>
+ <tr><td>Tax from ₹8,00,001 to ₹12,00,000 (@ 10%)</td><td><input type="number" id="newSlab3" class="form-input-field text-numeric-align" value="0" readonly></td></tr>
+ <tr><td>Tax from ₹12,00,001 to ₹16,00,000 (@ 15%)</td><td><input type="number" id="newSlab4" class="form-input-field text-numeric-align" value="0" readonly></td></tr>
+ <tr><td>Tax from ₹16,00,001 to ₹20,00,000 (@ 20%)</td><td><input type="number" id="newSlab5" class="form-input-field text-numeric-align" value="0" readonly></td></tr>
+ <tr><td>Tax from ₹20,00,001 to ₹24,00,000 (@ 25%)</td><td><input type="number" id="newSlab6" class="form-input-field text-numeric-align" value="0" readonly></td></tr>
+ <tr><td>Tax above ₹24,00,000 (@ 30%)</td><td><input type="number" id="newSlab7" class="form-input-field text-numeric-align" value="0" readonly></td></tr>
+ </tbody>
+ </table>
+ </div>
+ </fieldset>
+ <!-- Section G: Final Tax Computations & Complete Refund/Deficit Engine -->
+ <fieldset class="form-layout-section">
+ <legend>FINAL TAX COMPUTATION</legend>
+ <div class="table-scroll-container">
+ <table class="computational-matrix-table">
+ <tbody>
+ <tr>
+ <td style="width: 70%;"><strong>TOTAL TAX PAYABLE (Sum of all Slabs)</strong></td>
+ <td style="width: 30%;"><input type="number" id="totalTaxPayable" class="form-input-field text-numeric-align font-weight-bold" value="0" readonly></td>
+ </tr>
+ <tr>
+ <td>Less: Tax Rebate / Marginal Relief U/S 87A</td>
+ <td><input type="number" id="rebate87A" class="form-input-field text-numeric-align color-positive" value="0" readonly></td>
+ </tr>
+ <tr>
+ <td>Less: Rebate Under Section 89(1) (Arrears Relief Input)</td>
+ <td><input type="number" id="input80Relief" class="form-input-field text-numeric-align" value="0" oninput="calculateTaxEngine()"></td>
+ </tr>
+ <tr>
+ <td><strong>NET TAX PAYABLE (After 87A & 89 Relief)</strong></td>
+ <td><input type="number" id="netTaxPayable" class="form-input-field text-numeric-align font-weight-bold" value="0" readonly></td>
+ </tr>
+ <tr>
+ <td>Add: Education and Health Cess @ 4%</td>
+ <td><input type="number" id="healthEducationCess" class="form-input-field text-numeric-align" value="0" readonly></td>
+ </tr>
+ <tr class="summary-highlight-row">
+ <td><strong>TOTAL TAX LIABILITY (Rounded to Nearest 10)</strong></td>
+ <td><input type="number" id="finalTotalTaxLiability" class="form-input-field text-numeric-align font-weight-bold" value="0" readonly></td>
+ </tr>
+ <tr><td colspan="2" class="sub-section-title"><strong>TDS Deducted at Source Break-up Workspace</strong></td></tr>
+ <tr>
+ <td>A: TDS Deducted - Income Tax Component</td>
+ <td><input type="number" id="tdsIncomeTaxComp" class="form-input-field text-numeric-align" value="0" oninput="calculateTaxEngine()"></td>
+ </tr>
+ <tr>
+ <td>B: TDS Deducted - Health & Education Cess Component</td>
+ <td><input type="number" id="tdsCessComp" class="form-input-field text-numeric-align" value="0" oninput="calculateTaxEngine()"></td>
+ </tr>
+ <tr class="summary-highlight-row">
+ <td><strong>Total TDS Already Deposited (A + B)</strong></td>
+ <td><input type="number" id="totalTdsDeposited" class="form-input-field text-numeric-align font-weight-bold" value="0" readonly></td>
+ </tr>
+ <tr id="dynamicOutcomeRow" class="outcome-refund-style">
+ <td><strong id="dynamicOutcomeLabel">REFUND ADMISSIBLE (Surplus)</strong></td>
+ <td><input type="text" id="dynamicOutcomeValue" class="form-input-field text-numeric-align font-weight-bold output-clean-color" value="₹0" readonly></td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+ </fieldset>
+<!-- Section H: Verification & Responsible Person Authentication Panel -->
+<fieldset class="form-layout-section execution-verification-card">
+ <legend>Verification</legend>
+ <div class="verification-text-body">
+ <p>
+ I, <span id="declNameLabel" class="input-underline-text" style="min-width: 150px; 
+display: inline-block;">______________________</span>, 
+son/daughter/wife of Sh. <span style="color: red; font-weight: bold;">*</span><input 
+type="text" id="employerRelationName" placeholder="Enter Father's/Spouse Name" 
+class="inline-date-picker-input" style="width: 220px;" required 
+oninput="this.value = this.value.toUpperCase();">,
+
+ working in the capacity as <span id="declDesignationLabel" class="input-underline-text" style="min-width: 120px; display: inline-block;">_______________</span> 
+ do hereby certify that the information given above is true, complete and correct based on official records, for tax deducted at source from income under the head "Salaries" pursuant to <strong>Section 392 of the Income-tax Act, 2025</strong>.
+</p>
+ </div>
+ <div class="verification-meta-footer-row">
+ <div class="meta-date-place">
+ <p><strong>Place:</strong> Kaliara</p>
+ <p><strong>Date:</strong> <input type="text" id="formCurrentDate" value="10-07-2026" class="inline-date-picker-input"></p>
+ </div>
+ <div class="meta-signature-area">
+ <div class="signature-line-dash"></div>
+ <p class="sig-label">Signature of person responsible for deduction of tax</p>
+ <p class="sig-name">Full Name: <strong id="dynamicSignatureFooter">______________________</strong></p>
+ </div>
+ </div>
+</fieldset>
+<!-- NEW PREMIUM CREDENTIAL BADGE WITH PNG AVATAR -->
+<!-- INTEGRATED BOTTOM CONTROL DECK (LEFT: CREDENTIAL WITH WORDS | RIGHT: BUTTONS) -->
+<div class="premium-footer-deck-wrapper no-print">
+
+    <!-- LEFT SIDE: CREDENTIAL BADGE WITH PREMIUM TECH WORDING -->
+    <div class="system-craft-badge-panel">
+        <div class="badge-flex-container">
+            <div class="badge-avatar-wrapper">
+                <img src="jasbir.png" alt="Jasbir Singh" class="badge-avatar-img" onerror="this.src='https://placeholder.com'">
+            </div>
+            <div class="badge-info-side">
+                <div class="badge-system-tag">Core System Architect &amp; Designer</div>
+                <h3 class="badge-dev-name">JASBIR SINGH</h3>
+                <p class="badge-dev-role">JOA (IT) | GSSS KALIARA</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- RIGHT SIDE: COMPLIANCE ENGINE OPERATIONS BUTTONS (CLEANED) -->
+<div class="action-control-deck-bar">
+    <button type="button" class="action-btn btn-excel-submit" onclick="sendCompleteFormToGoogleSheet()">Submit Tax Data</button>
+    <button type="button" class="action-btn btn-pdf-print" onclick="window.print()">Print Form 16 (A4 PDF)</button>
+</div>
+</div>
+</div>
+ <script>
+ // Core Logic Matrix Engine for Calculations
+ function getNum(id) {
+   const el = document.getElementById(id);
+   if (!el) return 0;
+   const val = parseFloat(el.value);
+   return isNaN(val) ? 0 : val;
+ }
+ function setNum(id, val) {
+   const el = document.getElementById(id);
+   if (el) el.value = Math.round(val);
+ }
+ // Handles dynamic Gray-out and Lockout system for alternate regime
+ function handleRegimeShift() {
+ const currentRegime = document.getElementById('taxRegimeSelect').value;
+ const dependentInputs = document.querySelectorAll('.regime-dependent');
+ const hraSection = document.getElementById('hraSectionBlock');
+ const viaSection = document.getElementById('chapterViaBlock');
+ const otherSection = document.getElementById('otherDeductionsBlock');
+ const oldSlabView = document.getElementById('oldSlabWrapper');
+ const newSlabView = document.getElementById('newSlabWrapper');
+ if (currentRegime === 'new' || currentRegime === 'NEW') {
+ dependentInputs.forEach(input => {
+ input.disabled = true;
+ input.value = 0;
+ });
+ if (document.getElementById('hraTenPercent')) {
+ document.getElementById('hraTenPercent').disabled = true;
+ document.getElementById('hraTenPercent').value = 0;
+ }
+ if (document.getElementById('select80DD')) document.getElementById('select80DD').value = 'NONE';
+ if (document.getElementById('select80U')) document.getElementById('select80U').value = 'NONE';
+ if (hraSection) hraSection.classList.add('regime-disabled-mask');
+ if (viaSection) viaSection.classList.add('regime-disabled-mask');
+ if (otherSection) otherSection.classList.add('regime-disabled-mask');
+ if (oldSlabView) oldSlabView.classList.add('hide-slab-panel');
+ if (newSlabView) newSlabView.classList.remove('hide-slab-panel');
+ } else {
+dependentInputs.forEach(input => {
+input.disabled = false;
+});
+// ओल्ड रिजीम चुनते ही इस बॉक्स को यूज़र के लिए पूरी तरह अनलॉक करना
+const hraBox = document.getElementById('hraTenPercent');
+if (hraBox) {
+hraBox.disabled = false;
+hraBox.removeAttribute('readonly');
+}
+if (hraSection) hraSection.classList.remove('regime-disabled-mask');
+
+ if (viaSection) viaSection.classList.remove('regime-disabled-mask');
+ if (otherSection) otherSection.classList.remove('regime-disabled-mask');
+ 
+ if (oldSlabView) oldSlabView.classList.remove('hide-slab-panel');
+ if (newSlabView) newSlabView.classList.add('hide-slab-panel');
+ }
+ calculateTaxEngine();
+}
+ // Full Tax Calculations Processing Logic Matrix
+ function calculateTaxEngine() {
+   const currentRegime = document.getElementById('taxRegimeSelect').value;
+   const basicDa = getNum('annualBasicDa');
+   const perq17_2 = getNum('perquisites17_2');
+   const profit17_3 = getNum('profits17_3');
+    // --- AUTOMATIC MULTI-USER DYNAMIC FOOTER SYNC ---
+ const employeeInputName = document.getElementById('empName').value.trim();
+ const employeeInputDesignation = document.getElementById('empDesignation').value.trim();
+ const activeName = employeeInputName !== "" ? employeeInputName.toUpperCase() : "______________________";
+ const activeDesignation = employeeInputDesignation !== "" ? employeeInputDesignation.toUpperCase() : "_______________";
+ 
+ document.getElementById('declNameLabel').innerText = activeName;
+ document.getElementById('declDesignationLabel').innerText = activeDesignation;
+ if (employeeInputName !== "" || employeeInputDesignation !== "") {
+ document.getElementById('dynamicSignatureFooter').innerText = activeName + " - " + activeDesignation;
+ } else {
+ document.getElementById('dynamicSignatureFooter').innerText = "______________________";
+ }
+ // --- END OF FOOTER SYNC ---
+ // UPGRADED AUTOMATIC STANDARD DEDUCTION FOR AY 2027-28
+ // यहाँ 'NEW' और 'OLD' को छोटे-बड़े दोनों अक्षरों के लिए सुरक्षित कर दिया गया है
+ let standardDeduction = (currentRegime === 'new' || currentRegime === 'NEW') ? 75000 : 50000;
+ const grossSalaryBase = basicDa + perq17_2 + profit17_3;
+ // Standard deduction cannot exceed the gross salary base
+ const eligibleStandardDeduction = Math.min(grossSalaryBase, standardDeduction);
+ setNum('standardDeductionRow', eligibleStandardDeduction);
+ const totalGross = grossSalaryBase - eligibleStandardDeduction;
+ setNum('totalGrossSalary', totalGross);
+ let finalHraExemption = 0;
+                  // छोटे और बड़े दोनों अक्षरों (old / OLD) को पास करने के लिए कंडीशन ठीक की गई
+        if (currentRegime === 'old' || currentRegime === 'OLD') {
+            const hraRec = getNum('hraReceived');
+            const rentPaid = getNum('hraRentPaid');
+            const salaryPct = getNum('hraSalaryPercentage');
+             // सीधे इनपुट बॉक्स से यूज़र का मैनुअल डेटा लिया
+            const tenPercentSal = getNum('hraTenPercent');
+            let excessRent = rentPaid - tenPercentSal;
+            if (excessRent < 0) excessRent = 0;
+            setNum('hraRentExcess', excessRent);
+            finalHraExemption = Math.min(hraRec, excessRent, salaryPct);
+// ओल्ड रिजीम में इस बॉक्स को कड़ाई से खुला रखना
+const hraBox = document.getElementById('hraTenPercent');
+if (hraBox && (currentRegime === 'old' || currentRegime === 'OLD')) {
+hraBox.disabled = false;
+hraBox.removeAttribute('readonly');
+}
+ // ओल्ड रिजीम में इस बॉक्स को खुला (Active) रखना
+ if (document.getElementById('hraTenPercent')) {
+ document.getElementById('hraTenPercent').disabled = false;
+ }
+ } else {
+// जब तक न्यू रिजीम एक्टिव न हो, तब तक वैल्यू को 0 पर रीसेट नहीं करेगा
+if (currentRegime === 'new' || currentRegime === 'NEW') {
+    if (document.getElementById('hraTenPercent')) {
+        document.getElementById('hraTenPercent').disabled = true;
+        document.getElementById('hraTenPercent').value = 0;
+    }
+}
+setNum('hraRentExcess', 0);
+}
+   setNum('finalHraExemption', finalHraExemption);
+   let total80CDeclared = 0;
+   let total80CEligible = 0;
+   let eligible80Ccd1b = 0;
+   let eligible80Ccd2 = 0;
+   let finalViaTotal = 0;
+   if (currentRegime === 'old' || currentRegime === 'OLD') {
+ const gpf = getNum('inputGpf');
+     const gis = getNum('inputGis');
+     const uti = getNum('inputUti');
+     const hloan = getNum('inputHouseLoan');
+     const tuition = getNum('inputTuition');
+     const nsc = getNum('inputNsc');
+     total80CDeclared = gpf + gis + uti + hloan + tuition + nsc;
+     total80CEligible = Math.min(total80CDeclared, 150000);
+     const raw80Ccd1b = getNum('input80Ccd1b');
+     eligible80Ccd1b = Math.min(raw80Ccd1b, 50000);
+     // Government employee 14% matching employer NPS limit check
+     const raw80Ccd2 = getNum('input80Ccd2');
+     const govtCeilingLimit = basicDa * 0.14;
+     eligible80Ccd2 = Math.min(raw80Ccd2, govtCeilingLimit);
+     finalViaTotal = total80CEligible + eligible80Ccd1b + eligible80Ccd2;
+   }
+   setNum('total80CDeclared', total80CDeclared);
+   setNum('total80CEligible', total80CEligible);
+   setNum('eligible80Ccd1b', eligible80Ccd1b);
+   setNum('eligible80Ccd2', eligible80Ccd2);
+   setNum('totalChapterViaDeductions', finalViaTotal);
+   let eligible80D = 0;
+   let eligible80DD = 0;
+   let eligible80U = 0;
+   let eligible80G = 0;
+   let eligible57iia = 0;
+   let finalOtherTotal = 0;
+   if (currentRegime === 'old' || currentRegime === 'OLD') {
+ const raw80D = getNum('input80D');
+     eligible80D = Math.min(raw80D, 25000);
+     const type80DD = document.getElementById('select80DD').value;
+     if (type80DD === 'STANDARD') eligible80DD = 75000;
+     else if (type80DD === 'SEVERE') eligible80DD = 125000;
+     const type80U = document.getElementById('select80U').value;
+     if (type80U === 'STANDARD') eligible80U = 75000;
+     else if (type80U === 'SEVERE') eligible80U = 125000;
+     const raw80G = getNum('input80G');
+     eligible80G = raw80G;
+     const raw57iia = getNum('input57iia');
+     eligible57iia = Math.min(raw57iia, 25000);
+     finalOtherTotal = eligible80D + eligible80DD + eligible80U + eligible80G + eligible57iia;
+   }
+   setNum('eligible80D', eligible80D);
+   setNum('eligible80DD', eligible80DD);
+   setNum('eligible80U', eligible80U);
+   setNum('eligible80G', eligible80G);
+   setNum('eligible57iia', eligible57iia);
+   setNum('totalOtherDeductions', finalOtherTotal);
+   let rawNetTaxable = totalGross - finalHraExemption - finalViaTotal - finalOtherTotal;
+   if (rawNetTaxable < 0) rawNetTaxable = 0;
+   let netTaxableIncome = Math.round(rawNetTaxable / 10) * 10;
+   setNum('netTaxableIncome', netTaxableIncome);
+   let basicTax = 0;
+   setNum('oldSlab1', 0); setNum('oldSlab2', 0); setNum('oldSlab3', 0); setNum('oldSlab4', 0);
+   setNum('newSlab1', 0); setNum('newSlab2', 0); setNum('newSlab3', 0); setNum('newSlab4', 0);
+   setNum('newSlab5', 0); setNum('newSlab6', 0); setNum('newSlab7', 0);
+   if (currentRegime === 'old' || currentRegime === 'OLD') {
+ let remTaxable = netTaxableIncome;
+     if (remTaxable > 1000000) {
+       let tax4 = (remTaxable - 1000000) * 0.30;
+       setNum('oldSlab4', tax4); basicTax += tax4; remTaxable = 1000000;
+     }
+     if (remTaxable > 500000) {
+       let tax3 = (remTaxable - 500000) * 0.20;
+       setNum('oldSlab3', tax3); basicTax += tax3; remTaxable = 500000;
+     }
+     if (remTaxable > 250000) {
+       let tax2 = (remTaxable - 250000) * 0.05;
+       setNum('oldSlab2', tax2); basicTax += tax2;
+     }
+   } else {
+let remTaxable = netTaxableIncome;
+// 30% Slab - Corrected to sequential downward-cascading progression
+if (remTaxable > 2400000) {
+let tax7 = (remTaxable - 2400000) * 0.30;
+setNum('newSlab7', tax7); basicTax += tax7; remTaxable = 2400000;
+}
+if (remTaxable > 2000000) {
+let tax6 = (remTaxable - 2000000) * 0.25;
+setNum('newSlab6', tax6); basicTax += tax6; remTaxable = 2000000;
+}
+if (remTaxable > 1600000) {
+let tax5 = (remTaxable - 1600000) * 0.20;
+setNum('newSlab5', tax5); basicTax += tax5; remTaxable = 1600000;
+}
+if (remTaxable > 1200000) {
+let tax4 = (remTaxable - 1200000) * 0.15;
+setNum('newSlab4', tax4); basicTax += tax4; remTaxable = 1200000;
+}
+if (remTaxable > 800000) {
+let tax3 = (remTaxable - 800000) * 0.10;
+setNum('newSlab3', tax3); basicTax += tax3; remTaxable = 800000;
+}
+if (remTaxable > 400000) {
+let tax2 = (remTaxable - 400000) * 0.05;
+setNum('newSlab2', tax2); basicTax += tax2;
+}
+}
+   setNum('totalTaxPayable', basicTax);
+   // UPGRADED REBATE WITH EXPLICIT BOUNDARIES
+   let rebate = 0;
+   if (currentRegime === 'new' || currentRegime === 'NEW') {
+     if (netTaxableIncome <= 1200000) {
+       rebate = basicTax;
+     } else {
+       let excessIncome = netTaxableIncome - 1200000;
+       let taxOnTwelveLakh = 60000;
+       let increaseInTax = basicTax - taxOnTwelveLakh;
+       if (increaseInTax > excessIncome) {
+         rebate = basicTax - excessIncome;
+       } else {
+         rebate = 0;
+       }
+     }
+    } else if (currentRegime === 'old' && netTaxableIncome <= 500000) {
+     rebate = Math.min(basicTax, 12500);
+   }
+   setNum('rebate87A', rebate);
+   let postRebateTax = basicTax - rebate;
+   if (postRebateTax < 0) postRebateTax = 0;
+   const relief89 = getNum('input80Relief');
+   let netTaxPayableVal = postRebateTax - relief89;
+   if (netTaxPayableVal < 0) netTaxPayableVal = 0;
+   setNum('netTaxPayable', netTaxPayableVal);
+   let cessVal = netTaxPayableVal * 0.04;
+   setNum('healthEducationCess', cessVal);
+   let finalLiabilityRaw = netTaxableIncome > 0 ? (netTaxPayableVal + cessVal) : 0;
+   let finalTotalTaxLiability = Math.round(finalLiabilityRaw / 10) * 10;
+   setNum('finalTotalTaxLiability', finalTotalTaxLiability);
+   const tdsTaxComp = getNum('tdsIncomeTaxComp');
+   const tdsCessComp = getNum('tdsCessComp');
+   const totalTdsAlreadyDeposited = tdsTaxComp + tdsCessComp;
+   setNum('totalTdsDeposited', totalTdsAlreadyDeposited);
+   const outcomeRow = document.getElementById('dynamicOutcomeRow');
+   const outcomeLabel = document.getElementById('dynamicOutcomeLabel');
+   const outcomeValue = document.getElementById('dynamicOutcomeValue');
+   if (outcomeRow && outcomeLabel && outcomeValue) {
+     if (totalTdsAlreadyDeposited >= finalTotalTaxLiability) {
+       let surplusRefund = totalTdsAlreadyDeposited - finalTotalTaxLiability;
+       outcomeLabel.innerText = "REFUND ADMISSIBLE (Surplus)";
+       outcomeValue.value = "₹" + Math.round(surplusRefund);
+       outcomeRow.className = "outcome-refund-style";
+       outcomeValue.style.color = "#166534";
+     } else {
+       let deficitShortfall = finalTotalTaxLiability - totalTdsAlreadyDeposited;
+       outcomeLabel.innerText = " NET TAX PAYABLE (Shortfall)";
+       outcomeValue.value = "₹" + Math.round(deficitShortfall);
+       outcomeRow.className = "outcome-shortfall-style";
+       outcomeValue.style.color = "#991b1b";
+     }
+   }
+ }
+ // Standalone Excel Sheet Data Export Engine
+ function exportDataToExcel() {
+   if (typeof XLSX === 'undefined') {
+     alert("Excel engine is not fully loaded. Verify your local offline fallback setup.");
+     return;
+   }
+   try {
+     const dataPayload = [
+       { "Form 16 Parameter Field": "Organization Name", "Value/Particulars": "GSSS KALIARA" },
+       { "Form 16 Parameter Field": "System Admin/Developer", "Value/Particulars": "Jasbir Singh" },
+       { "Form 16 Parameter Field": "Assessment Year", "Value/Particulars": "2027-28" },
+       { "Form 16 Parameter Field": "Selected Tax Regime Strategy", "Value/Particulars": document.getElementById('taxRegimeSelect').value },
+       { "Form 16 Parameter Field": "Employee Full Name", "Value/Particulars": document.getElementById('empName').value },
+       { "Form 16 Parameter Field": "Designation Profile", "Value/Particulars": document.getElementById('empDesignation').value },
+       { "Form 16 Parameter Field": "Employee Permanent PAN", "Value/Particulars": document.getElementById('employeePAN').value },
+       { "Form 16 Parameter Field": "Annual Basic Pay and DA Pool", "Value/Particulars": document.getElementById('annualBasicDa').value },
+       { "Form 16 Parameter Field": "Perquisites Value U/S 17(2)", "Value/Particulars": document.getElementById('perquisites17_2').value },
+       { "Form 16 Parameter Field": "Profits U/S 17(3)", "Value/Particulars": document.getElementById('profits17_3').value },
+       { "Form 16 Parameter Field": "HRA Received from Employer", "Value/Particulars": document.getElementById('hraReceived').value },
+       { "Form 16 Parameter Field": "Actual Rent Paid by Employee", "Value/Particulars": document.getElementById('hraRentPaid').value },
+       { "Form 16 Parameter Field": "HRA Exemption Percentage Threshold", "Value/Particulars": document.getElementById('hraSalaryPercentage').value },
+       { "Form 16 Parameter Field": "GPF Saving Entry", "Value/Particulars": document.getElementById('inputGpf').value },
+       { "Form 16 Parameter Field": "GIS Saving Entry", "Value/Particulars": document.getElementById('inputGis').value },
+       { "Form 16 Parameter Field": "UTI Saving Entry", "Value/Particulars": document.getElementById('inputUti').value },
+       { "Form 16 Parameter Field": "House Loan Principal Entry", "Value/Particulars": document.getElementById('inputHouseLoan').value },
+       { "Form 16 Parameter Field": "Tuition Fee Entry", "Value/Particulars": document.getElementById('inputTuition').value },
+       { "Form 16 Parameter Field": "NSC Entry", "Value/Particulars": document.getElementById('inputNsc').value },
+       { "Form 16 Parameter Field": "NPS Additional 80CCD(1B)", "Value/Particulars": document.getElementById('input80Ccd1b').value },
+       { "Form 16 Parameter Field": "Employer Contribution 80CCD(2)", "Value/Particulars": document.getElementById('input80Ccd2').value },
+       { "Form 16 Parameter Field": "Health Insurance 80D", "Value/Particulars": document.getElementById('input80D').value },
+       { "Form 16 Parameter Field": "Disability Dependent 80DD Status", "Value/Particulars": document.getElementById('select80DD').value },
+       { "Form 16 Parameter Field": "Self Disability 80U Status", "Value/Particulars": document.getElementById('select80U').value },
+       { "Form 16 Parameter Field": "Donations 80G", "Value/Particulars": document.getElementById('input80G').value },
+       { "Form 16 Parameter Field": "Family Pension 57iia", "Value/Particulars": document.getElementById('input57iia').value },
+       { "Form 16 Parameter Field": "Arrears Relief Section 89(1)", "Value/Particulars": document.getElementById('input80Relief').value },
+       { "Form 16 Parameter Field": "TDS Income Tax Component Already Deducted", "Value/Particulars": document.getElementById('tdsIncomeTaxComp').value },
+       { "Form 16 Parameter Field": "TDS Cess Component Already Deducted", "Value/Particulars": document.getElementById('tdsCessComp').value },
+       { "Form 16 Parameter Field": "Computed Net Taxable Income", "Value/Particulars": document.getElementById('netTaxableIncome').value },
+       { "Form 16 Parameter Field": "Final Calculated Tax Liability Pool", "Value/Particulars": document.getElementById('finalTotalTaxLiability').value },
+       { "Form 16 Parameter Field": "Final Engine Outcome Status", "Value/Particulars": document.getElementById('dynamicOutcomeLabel').innerText },
+       { "Form 16 Parameter Field": "Final Outcome Value Particular", "Value/Particulars": document.getElementById('dynamicOutcomeValue').value }
+     ];
+     const worksheet = XLSX.utils.json_to_sheet(dataPayload);
+     const workbook = XLSX.utils.book_new();
+     XLSX.utils.book_append_sheet(workbook, worksheet, "Tax Compilation Audit");
+     worksheet['!cols'] = [{ wch: 45 }, { wch: 45 }];
+     XLSX.writeFile(workbook, "Form16_CompleteSummary_GSSS_Kaliara.xlsx");
+   } catch (error) {
+     alert("Excel Export Execution Block Interrupted: " + error.message);
+   }
+ }
+ function triggerExcelImport() {
+   const inputNode = document.getElementById('excelFileLoaderInput');
+   if (inputNode) inputNode.click();
+ }
+ // FIXED Reverse Excel Loader Engine using local security-compliant arrays
+ function loadDataFromExcel(event) {
+   if (typeof XLSX === 'undefined') {
+     alert("Excel engine is unavailable. Form load cannot proceed.");
+     return;
+   }
+   try {
+     const input = event.target;
+     if (!input.files || input.files.length === 0) return;
+      const file = input.files;
+     const reader = new FileReader();
+     reader.onload = function(e) {
+       const data = new Uint8Array(e.target.result);
+       const workbook = XLSX.read(data, { type: 'array' });
+       const firstSheetName = workbook.SheetNames;
+       const worksheet = workbook.Sheets[firstSheetName];
+       const jsonData = XLSX.utils.sheet_to_json(worksheet);
+       const idMapping = {
+         "Selected Tax Regime Strategy": "taxRegimeSelect",
+         "Employee Full Name": "empName",
+         "Designation Profile": "empDesignation",
+         "Employee Permanent PAN": "employeePAN",
+         "Annual Basic Pay and DA Pool": "annualBasicDa",
+         "Perquisites Value U/S 17(2)": "perquisites17_2",
+         "Profits U/S 17(3)": "profits17_3",
+         "HRA Received from Employer": "hraReceived",
+         "Actual Rent Paid by Employee": "hraRentPaid",
+         "HRA Exemption Percentage Threshold": "hraSalaryPercentage",
+         "GPF Saving Entry": "inputGpf",
+         "GIS Saving Entry": "inputGis",
+         "UTI Saving Entry": "inputUti",
+         "House Loan Principal Entry": "inputHouseLoan",
+         "Tuition Fee Entry": "inputTuition",
+         "NSC Entry": "inputNsc",
+         "NPS Additional 80CCD(1B)": "input80Ccd1b",
+         "Employer Contribution 80CCD(2)": "input80Ccd2",
+         "Health Insurance 80D": "input80D",
+         "Disability Dependent 80DD Status": "select80DD",
+         "Self Disability 80U Status": "select80U",
+         "Donations 80G": "input80G",
+         "Family Pension 57iia": "input57iia",
+         "Arrears Relief Section 89(1)": "input80Relief",
+         "TDS Income Tax Component Already Deducted": "tdsIncomeTaxComp",
+         "TDS Cess Component Already Deducted": "tdsCessComp"
+       };
+       jsonData.forEach(row => {
+         const fieldName = row["Form 16 Parameter Field"];
+         const value = row["Value/Particulars"];
+         const targetId = idMapping[fieldName];
+         if (targetId) {
+           const element = document.getElementById(targetId);
+           if (element) {
+             element.value = value;
+           }
+         }
+       });
+        handleRegimeShift();
+       alert("Form 16 Workspace Matrix Loaded successfully from Excel!");
+     };
+     reader.readAsArrayBuffer(file);
+   } catch (error) {
+     alert("Excel Data Stream Parsing Interrupted: " + error.message);
+   }
+ }
+window.onload = function() {
+ handleRegimeShift();
+ // Automatic Real-Time System Generated Date Engine (DD-MM-YYYY Format)
+ const today = new Date();
+ const dd = String(today.getDate()).padStart(2, '0');
+ const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+ const yyyy = today.getFullYear();
+ const formattedDate = dd + '-' + mm + '-' + yyyy;
+ const dateInput = document.getElementById('formCurrentDate');
+ if (dateInput) {
+     dateInput.value = formattedDate;
+ }
+}
+ </script>
+</body>
+<!-- जसबीर के फॉर्म का कम्प्लीट डायनेमिक इंजन (बिना आईडी बदले सारा डेटा सेव) -->
+<script>
+(function() {
+  // 1. अपना नया गूगल स्क्रिप्ट वेब ऐप URL यहाँ डालें
+  const GOOGLE_DATABASE_URL = "https://script.google.com/macros/s/AKfycbyNAhDWmpvnfS2ODwJwsZzuAaeZmqaMAUQifxuud-krKE2jdcOZOsjS50cO7e9y6gFbkg/exec";
+ // 2. Upgraded Secure View Routing Engine (Jasbir's Master Lock)
+window.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentView = urlParams.get('view');
+    
+    // सुरक्षा कीवर्ड और पासवर्ड (इसे आप बदल सकते हैं)
+    const SECRET_ADMIN_KEY = "Jassi1974"; 
+    const ADMIN_PASSWORD = "Jassi@414"; 
+
+    // यह फंक्शन कर्मचारियों के लिए एडमिन बटन्स को सुरक्षित तरीके से छुपाता है
+    function lockToEmployeeMode() {
+        const allButtons = document.querySelectorAll('button, input[type="button"], .action-btn');
+        allButtons.forEach(btn => {
+            if (btn) {
+                const text = (btn.innerText || btn.value || "").toLowerCase();
+                if (text.includes('print') || text.includes('load') || text.includes('excel') || text.includes('data')) {
+                    btn.style.display = 'none';
+                }
+            }
+        });
+
+        // कर्मचारी के लिए 'Submit Information to Office' बटन बनाना (वही पुरानी ID के साथ)
+        let submitBtn = document.getElementById('officeSubmitBtn');
+        if (!submitBtn) {
+            const controlDeck = document.querySelector('.action-control-deck-bar') || document.body;
+            submitBtn = document.createElement('button');
+            submitBtn.type = 'button';
+            submitBtn.id = 'officeSubmitBtn';
+            submitBtn.innerText = 'Submit Information to Office';
+            submitBtn.style.cssText = "background-color: #16a34a; color: white; padding: 12px 25px; margin: 15px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 16px;";
+            if (controlDeck) controlDeck.appendChild(submitBtn);
+        }
+        if (submitBtn) {
+            submitBtn.addEventListener('click', sendCompleteFormToGoogleSheet);
+        }
+    }
+
+    // मेन राउटर डिसीजन लॉजिक
+    if (currentView === SECRET_ADMIN_KEY) {
+        // अगर सही सीक्रेट यूआरएल डाला है, तो पासवर्ड प्रॉम्ट दिखाओ
+        let authCheck = prompt("सुरक्षा जांच: आगे बढ़ने के लिए एडमिन पिन दर्ज करें:");
+        if (authCheck === ADMIN_PASSWORD) {
+            alert("पहुंच स्वीकृत। स्वागत है एडमिन!");
+            // एडमिन मोड सक्रिय: कोई बटन नहीं छुपेगा, सब दिखाई देगा
+        } else {
+            alert("गलत पिन! आपको सुरक्षित कर्मचारी मोड पर भेजा जा रहा है।");
+            window.location.href = window.location.origin + window.location.pathname + '?view=employee';
+        }
+    } else {
+        // डिफ़ॉल्ट व्यवहार: खाली यूआरएल हो या कोई यूआरएल बदले, हमेशा एम्प्लोयी मोड लॉक रहेगा
+        lockToEmployeeMode();
+    }
+});
+ // Magic Live Cloud Fetch & Auto-Fill Matrix Engine (Globally Exposed Complete Function)
+async function fetchDataFromGoogleSheetByPan() {
+    const panInput = document.getElementById('employeePAN') ? document.getElementById('employeePAN').value.trim().toUpperCase() : "";
+    if (!/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(panInput)) {
+        alert("Error: Please enter a valid 10-digit PAN format (e.g., ABCDE1234F) before clicking fetch.");
+        return;
+    }
+    const targetBtn = document.querySelector('.btn-excel-load') || document.getElementById('fetchBtn');
+    const originalText = targetBtn ? targetBtn.innerText : 'Fetch Saved Record';
+    if (targetBtn) { targetBtn.innerText = 'Fetching Active Record...'; targetBtn.disabled = true; }
+    try {
+        const fetchUrl = GOOGLE_DATABASE_URL + "?fetchPan=" + encodeURIComponent(panInput);
+        const response = await fetch(fetchUrl);
+        const resultText = await response.text();
+        if (resultText === "NOT_FOUND") { if (targetBtn) { targetBtn.innerText = originalText; targetBtn.disabled = false; } return; }
+        const data = JSON.parse(resultText);
+        const fieldIds = [
+            'taxRegimeSelect', 'employerTAN', 'empName', 'empDesignation', 'employeePAN',
+            'annualBasicDa', 'perquisites17_2', 'profits17_3', 'standardDeductionRow', 'totalGrossSalary',
+            'hraReceived', 'hraTenPercent', 'hraRentPaid', 'hraRentExcess', 'hraSalaryPercentage', 'finalHraExemption',
+            'inputGpf', 'inputGis', 'inputUti', 'inputHouseLoan', 'inputTuition', 'inputNsc',
+            'total80CDeclared', 'total80CEligible', 'input80Ccd1b', 'eligible80Ccd1b', 'input80Ccd2', 'eligible80Ccd2',
+            'totalChapterViaDeductions', 'input80D', 'eligible80D', 'select80DD', 'eligible80DD', 'select80U', 'eligible80U',
+            'input80G', 'eligible80G', 'input57iia', 'eligible57iia', 'netTaxableIncome',
+            'totalTaxPayable', 'rebate87A', 'input80Relief', 'netTaxPayable', 'healthEducationCess', 'finalTotalTaxLiability',
+            'tdsIncomeTaxComp', 'tdsCessComp', 'totalTdsDeposited', 'dynamicOutcomeLabel', 'dynamicOutcomeValue',
+            'employerRelationName', 'formCurrentDate'
+        ];
+      fieldIds.forEach(id => {
+ const el = document.getElementById(id);
+ if (el && data[id] !== undefined) {
+ if (el.tagName === 'INPUT' || el.tagName === 'SELECT') {
+ // --- DATE FORMAT SECURITY GUARD FOR JABIR SINGH ---
+ if (id === 'formCurrentDate' && data[id].toString().includes('-')) {
+     try {
+         // अगर तारीख ISO format (YYYY-MM-DD...) में है तो उसे DD-MM-YYYY में बदलें
+         let rawDate = data[id].toString().split('T')[0]; // केवल तारीख का हिस्सा लें (YYYY-MM-DD)
+         let parts = rawDate.split('-');
+         if (parts[0].length === 4) { // अगर पहला हिस्सा साल (YYYY) है
+             el.value = parts[2] + '-' + parts[1] + '-' + parts[0]; // इसे DD-MM-YYYY बनाएं
+         } else {
+             el.value = data[id];
+         }
+     } catch(e) {
+         el.value = data[id]; // किसी एरर की स्थिति में डिफ़ॉल्ट वैल्यू सुरक्षित रखें
+     }
+ } else {
+     el.value = data[id];
+ }
+ // --- END OF DATE GUARD ---
+ } else {
+ el.innerText = id === 'dynamicOutcomeValue' && !data[id].toString().startsWith('₹') ? "₹" + data[id] : data[id];
+ }
+ }
+ });
+        if (typeof handleRegimeShift === 'function') handleRegimeShift();
+        if (typeof calculateTaxEngine === 'function') calculateTaxEngine();
+        alert("Success: Your Tax record successfully loaded from database!");
+    } catch (error) {
+        console.error("Cloud data stream fetch interrupted:", error);
+        alert("Network Error: Failed to fetch record. Check your web connection.");
+    } finally {
+        if (targetBtn) { targetBtn.innerText = originalText; targetBtn.disabled = false; }
+    }
+}
+// Bind the load handler explicitly to window scope to break out of internal closures
+window.fetchDataFromGoogleSheetByPan = fetchDataFromGoogleSheetByPan;
+// 3. जादुई इंजन: फॉर्म की हर एक फ़ील्ड को ऑटो-डिटेक्ट करके सीधे URL पैरामीटर्स के ज़रिए शीट में भेजना
+async function sendCompleteFormToGoogleSheet() {
+ if (typeof calculateTaxEngine === 'function') calculateTaxEngine();
+ // A. Strict Form Validation Guard on Submit
+ const checkName = document.getElementById('empName') ? document.getElementById('empName').value.trim() : "";
+ const checkDesig = document.getElementById('empDesignation') ? document.getElementById('empDesignation').value : "";
+ const checkPan = document.getElementById('employeePAN') ? document.getElementById('employeePAN').value.trim().toUpperCase() : "";
+ const checkTan = document.getElementById('employerTAN') ? document.getElementById('employerTAN').value.trim() : "";
+ const checkRelation = document.getElementById('employerRelationName') ? document.getElementById('employerRelationName').value.trim() : "";
+ if(!checkName || !checkDesig || !checkRelation || !/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(checkPan) || !/^[A-Z]{4}[0-9]{5}[A-Z]{1}$/.test(checkTan)){
+ alert("Submission Rejected: Please ensure Employee Name, Designation, Father/Spouse Name, and valid PAN/TAN formats are properly filled before saving.");
+ return;
+ }
+ // B. Professional Progress visual alert channel
+ const submitActionNode = document.querySelector('.btn-excel-submit') || document.getElementById('officeSubmitBtn');
+ const originalText = submitActionNode ? submitActionNode.innerText : "Submit Tax Data";
+ if(submitActionNode) { 
+ submitActionNode.innerText = "Verifying Integrity..."; 
+ submitActionNode.disabled = true; 
+ }
+ // NEW: Exhaustive Employee Identity Tampering Guard
+ const urlParams = new URLSearchParams(window.location.search);
+ if (urlParams.get('view') === 'employee') {
+ try {
+ const verifyUrl = GOOGLE_DATABASE_URL + "?verifyPan=" + encodeURIComponent(checkPan);
+ const response = await fetch(verifyUrl, { method: 'GET' });
+ const verificationStatus = await response.text();
+ if (verificationStatus.trim() === "DUPLICATE") {
+ alert("सुरक्षा अलर्ट (Security Alert):\n\nइस PAN कार्ड का टैक्स डेटा पहले ही सुरक्षित डेटाबेस में दर्ज किया जा चुका है।\nकर्मचारी मोड में आपको पुराना रिकॉर्ड बदलने (Overwrite) की अनुमति नहीं है।\nयदि आपको कोई सुधार करना है, तो कृपया स्कूल एडमिनिस्ट्रेटर से संपर्क करें।");
+ if(submitActionNode) { 
+ submitActionNode.innerText = originalText; 
+ submitActionNode.disabled = false; 
+ }
+ return; // Halt execution immediately to safeguard sheet records
+ }
+ } catch (verifyError) {
+ console.error("Identity Verification Protocol Failed:", verifyError);
+ alert("सुरक्षा जांच विफल! डेटाबेस से संपर्क नहीं हो सका। कृपया इंटरनेट कनेक्शन जांचें।");
+ if(submitActionNode) { 
+ submitActionNode.innerText = originalText; 
+ submitActionNode.disabled = false; 
+ }
+ return;
+ }
+ }
+ if(submitActionNode) { 
+ submitActionNode.innerText = "Syncing with Cloud Sheet..."; 
+ }
+ // C. Runtime Automated Payload Construction Matrix Loop
+ const payload = {};
+ const fieldIds = [
+ 'taxRegimeSelect', 'employerTAN', 'empName', 'empDesignation', 'employeePAN',
+ 'annualBasicDa', 'perquisites17_2', 'profits17_3', 'standardDeductionRow', 'totalGrossSalary',
+ 'hraReceived', 'hraTenPercent', 'hraRentPaid', 'hraRentExcess', 'hraSalaryPercentage', 'finalHraExemption',
+ 'inputGpf', 'inputGis', 'inputUti', 'inputHouseLoan', 'inputTuition', 'inputNsc',
+ 'total80CDeclared', 'total80CEligible', 'input80Ccd1b', 'eligible80Ccd1b', 'input80Ccd2', 'eligible80Ccd2',
+ 'totalChapterViaDeductions', 'input80D', 'eligible80D', 'select80DD', 'eligible80DD', 'select80U', 'eligible80U',
+ 'input80G', 'eligible80G', 'input57iia', 'eligible57iia', 'netTaxableIncome',
+ 'totalTaxPayable', 'rebate87A', 'input80Relief', 'netTaxPayable', 'healthEducationCess', 'finalTotalTaxLiability',
+ 'tdsIncomeTaxComp', 'tdsCessComp', 'totalTdsDeposited', 'dynamicOutcomeLabel', 'dynamicOutcomeValue',
+ 'employerRelationName', 'formCurrentDate'
+ ];
+ fieldIds.forEach(id => {
+ const el = document.getElementById(id);
+ if (!el) {
+ payload[id] = "";
+ return;
+ }
+ let value = (el.tagName === 'INPUT' || el.tagName === 'SELECT') ? el.value : el.innerText;
+ value = value ? value.trim() : "";
+ if (value === "" || el.disabled) {
+ if (el.tagName === 'SELECT') {
+ payload[id] = el.value || "NONE";
+ } else if (id.startsWith('input') || id.startsWith('annual') || id.startsWith('perquisites') || 
+ id.startsWith('profits') || id.startsWith('standard') || id.startsWith('total') || 
+ id.startsWith('hra') || id.startsWith('final') || id.startsWith('eligible') || 
+ id.startsWith('net') || id.startsWith('rebate') || id.startsWith('health') || id.startsWith('tds')) {
+ payload[id] = 0; 
+ } else {
+ payload[id] = ""; 
+ }
+ } else {
+ if (id === 'dynamicOutcomeValue') value = value.replace('₹', '');
+ payload[id] = value;
+ }
+ });
+  // D. Secure Web App Transmission Execution using proper content configuration matrix
+ try {
+ const queryParamsArray = [];
+ for (const key in payload) {
+ if (payload.hasOwnProperty(key)) {
+ queryParamsArray.push(encodeURIComponent(key) + "=" + encodeURIComponent(payload[key]));
+ }
+ }
+ const finalizedSyncUrl = GOOGLE_DATABASE_URL + "?" + queryParamsArray.join("&");
+  await fetch(finalizedSyncUrl, {
+ method: 'GET'
+ });
+ alert("Your Form 16 data has been safely synced with the school database!");
+  // Form Reset Layer
+ const inputElements = document.querySelectorAll('input');
+ inputElements.forEach(input => {
+ if (input.id !== 'employerTAN' && input.id !== 'formCurrentDate') {
+ if (input.type === 'text' || input.type === 'number') {
+ input.value = "";
+ }
+ }
+ }); 
+  const selectElements = document.querySelectorAll('select');
+ selectElements.forEach(select => {
+ select.selectedIndex = 0;
+ });
+  if (typeof calculateTaxEngine === 'function') calculateTaxEngine();
+  } catch (error) {
+ console.error("Cloud Database Transmission Fault:", error);
+ alert('नेटवर्क समस्या! कृपया इंटरनेट चालू करें या कनेक्शन चेक करें।');
+ } finally {
+ if(submitActionNode) { 
+ submitActionNode.innerText = originalText; 
+ submitActionNode.disabled = false; 
+ }
+ }
+}
+// Make the function explicitly global so the inner event listeners can access it flawlessly
+window.sendCompleteFormToGoogleSheet = sendCompleteFormToGoogleSheet;
+})();
+</script>
+</html>
